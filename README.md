@@ -1,6 +1,6 @@
 # CCNA Network Portfolio
 
-Kumpulan lab jaringan Cisco yang saya kerjakan selama training **CCNA 200-301** (ID-Networkers, 12-15 Oktober 2026) menggunakan **Cisco Packet Tracer**. Setiap lab berisi tujuan, topologi, tabel IP, konfigurasi, penjelasan, bukti verifikasi, serta masalah dan solusinya.
+Kumpulan lab jaringan Cisco yang saya kerjakan selama training **CCNA 200-301**menggunakan **Cisco Packet Tracer**. Setiap lab berisi tujuan, topologi, tabel IP, konfigurasi, penjelasan, bukti verifikasi, serta masalah dan solusinya.
 
 **Cahaya Jaya Prabasa** · Fresh graduate D4 Teknik Telekomunikasi, Politeknik Negeri Semarang
 Fokus: jaringan dan keamanan jaringan (Cisco CCNA, MikroTik MTCNA)
