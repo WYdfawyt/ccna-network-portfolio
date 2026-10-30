@@ -1,6 +1,6 @@
 # Lab 01 - HSRP: Gateway Redundan dengan NAT Overload
 
-> Platform: Cisco Packet Tracer · Training CCNA 200-301 (ID-Networkers), 12-15 Oktober 2026
+> Platform: Cisco Packet Tracer · Training CCNA 200-301 
 > File lab: `HSRP [Initial Config Done].pkt`
 
 ## 1. Tujuan
