@@ -1,0 +1,30 @@
+! GATEWAY-R1 (Cisco 1841) - HSRP Active (priority 200)
+enable
+configure terminal
+hostname GATEWAY-R1
+
+interface FastEthernet0/1
+ description Uplink ke ISP
+ ip address dhcp
+ ip nat outside
+ no shutdown
+
+interface FastEthernet0/0
+ description LAN 192.168.1.0/24
+ ip address 192.168.1.1 255.255.255.0
+ ip nat inside
+ standby 1 ip 192.168.1.3
+ standby 1 priority 200
+ standby 1 preempt
+ no shutdown
+
+access-list 77 permit 192.168.1.0 0.0.0.255
+ip nat inside source list 77 interface FastEthernet0/1 overload
+ip route 0.0.0.0 0.0.0.0 100.1.1.1
+end
+write memory
+
+! Verifikasi
+! show standby brief
+! show ip nat translations
+! show ip route
