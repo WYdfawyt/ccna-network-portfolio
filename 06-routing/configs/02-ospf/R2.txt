@@ -1,0 +1,23 @@
+! R2 - OSPF single area (area 0)
+enable
+configure terminal
+
+! Hapus static route
+no ip route 192.168.10.0 255.255.255.0 12.12.12.1
+no ip route 192.168.20.0 255.255.255.0 23.23.23.3
+
+interface loopback 0
+ ip address 2.2.2.2 255.255.255.255
+ exit
+
+router ospf 1
+ network 12.12.12.0 0.0.0.255 area 0
+ network 23.23.23.0 0.0.0.255 area 0
+ network 2.2.2.2 0.0.0.0 area 0
+ exit
+end
+write memory
+
+! Verifikasi
+! show ip route
+! show ip ospf neighbor

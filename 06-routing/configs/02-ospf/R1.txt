@@ -1,0 +1,29 @@
+! R1 - OSPF single area (area 0)
+enable
+configure terminal
+
+! Hapus static route
+no ip route 23.23.23.0 255.255.255.0 12.12.12.2
+no ip route 192.168.20.0 255.255.255.0 12.12.12.2
+
+! Loopback (dipakai sebagai Router-ID)
+interface loopback 0
+ ip address 1.1.1.1 255.255.255.255
+ exit
+
+router ospf 1
+ network 12.12.12.0 0.0.0.255 area 0
+ network 13.13.13.0 0.0.0.255 area 0
+ network 192.168.10.0 0.0.0.255 area 0
+ network 1.1.1.1 0.0.0.0 area 0
+ passive-interface fa0/1
+ exit
+end
+write memory
+
+! Verifikasi
+! show ip route
+! show ip ospf neighbor
+! show ip ospf interface fa0/0
+! show ip ospf interface s0/0/0
+! show ip ospf database

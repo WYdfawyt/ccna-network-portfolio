@@ -1,0 +1,29 @@
+! R1 (Cisco 1841) - static route
+enable
+configure terminal
+hostname R1
+
+interface fa0/0
+ description Ke R2
+ ip address 12.12.12.1 255.255.255.0
+ no shutdown
+ exit
+interface fa0/1
+ description LAN PC (SW1)
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+ exit
+interface s0/0/0
+ description Serial ke R3 (jalur cadangan)
+ ip address 13.13.13.1 255.255.255.0
+ no shutdown
+ exit
+
+ip route 23.23.23.0 255.255.255.0 12.12.12.2
+ip route 192.168.20.0 255.255.255.0 12.12.12.2
+end
+write memory
+
+! Verifikasi
+! show ip route
+! ping 192.168.20.10

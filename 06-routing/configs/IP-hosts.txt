@@ -1,0 +1,5 @@
+! Konfigurasi IP host (isi manual: klik perangkat > Desktop > IP Configuration > Static)
+
+PC0     IP 192.168.10.2   Mask 255.255.255.0  Gateway 192.168.10.1  (SW1)
+PC1     IP 192.168.10.3   Mask 255.255.255.0  Gateway 192.168.10.1  (SW1)
+Server  IP 192.168.20.10  Mask 255.255.255.0  Gateway 192.168.20.1  (SW3)

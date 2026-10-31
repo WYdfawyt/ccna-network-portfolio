@@ -1,0 +1,32 @@
+! R3 (Cisco 1841) - default route dan floating static
+enable
+configure terminal
+hostname R3
+
+interface fa0/0
+ description Ke R2
+ ip address 23.23.23.3 255.255.255.0
+ no shutdown
+ exit
+interface fa0/1
+ description LAN Server (SW3)
+ ip address 192.168.20.1 255.255.255.0
+ no shutdown
+ exit
+interface s0/0/0
+ description Serial ke R1 (jalur cadangan)
+ ip address 13.13.13.3 255.255.255.0
+ clock rate 64000
+ no shutdown
+ exit
+
+! Default route utama lewat R2
+ip route 0.0.0.0 0.0.0.0 23.23.23.2
+! Floating static: cadangan lewat serial ke R1 (AD 10)
+ip route 0.0.0.0 0.0.0.0 13.13.13.1 10
+end
+write memory
+
+! Verifikasi
+! show ip route
+! traceroute 192.168.10.2

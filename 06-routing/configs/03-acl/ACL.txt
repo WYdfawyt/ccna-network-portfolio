@@ -1,0 +1,52 @@
+! ACL - jalankan satu skenario, uji, lalu hapus sebelum skenario berikutnya
+
+!===== Skenario 1: Standard ACL (R3, dekat tujuan) =====
+! Blokir LAN PC 192.168.10.0/24 ke LAN server
+ip access-list standard 1
+ deny 192.168.10.0 0.0.0.255
+ permit any
+ exit
+interface fa0/1
+ ip access-group 1 out
+ exit
+do show access-lists
+! Hasil: ping dari PC0 ke server gagal (Destination host unreachable).
+! Ping dari router lain tetap berhasil.
+
+!===== Skenario 2: izinkan satu host (R3) =====
+ip access-list standard 1
+ 5 permit host 192.168.10.2
+ exit
+do show access-lists
+! Baris 5 berada di atas deny, sehingga PC0 (192.168.10.2) lolos.
+
+!===== Skenario 3: batasi akses remote VTY (R3) =====
+interface fa0/1
+ no ip access-group 1 out
+ exit
+access-list 2 permit host 192.168.10.2
+ip domain-name idn.id
+crypto key generate rsa general-keys modulus 1024
+username <user> secret <password>
+line vty 0 4
+ login local
+ access-class 2 in
+ exit
+! SSH ke R3 hanya diterima dari 192.168.10.2.
+
+!===== Skenario 4: Extended ACL (R1, dekat sumber) =====
+interface fa0/1
+ no ip access-group 1 out
+ exit
+ip access-list extended PC-SERVER
+ deny tcp 192.168.10.0 0.0.0.255 host 192.168.20.10 eq 80
+ deny tcp 192.168.10.0 0.0.0.255 host 192.168.20.10 eq ftp
+ deny icmp 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
+ permit ip any any
+ exit
+interface fa0/1
+ ip access-group PC-SERVER in
+ exit
+! Lepas ACL setelah uji:
+! interface fa0/1
+!  no ip access-group PC-SERVER in

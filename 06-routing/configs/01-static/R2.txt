@@ -1,0 +1,23 @@
+! R2 (Cisco 1841) - static route
+enable
+configure terminal
+hostname R2
+
+interface fa0/0
+ description Ke R1
+ ip address 12.12.12.2 255.255.255.0
+ no shutdown
+ exit
+interface fa0/1
+ description Ke R3
+ ip address 23.23.23.2 255.255.255.0
+ no shutdown
+ exit
+
+ip route 192.168.10.0 255.255.255.0 12.12.12.1
+ip route 192.168.20.0 255.255.255.0 23.23.23.3
+end
+write memory
+
+! Verifikasi
+! show ip route

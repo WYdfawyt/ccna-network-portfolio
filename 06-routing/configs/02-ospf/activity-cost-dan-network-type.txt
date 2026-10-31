@@ -1,0 +1,20 @@
+! Activity 1: ubah cost dan tipe network (R1 dan R2)
+! R1
+interface fa0/0
+ ip ospf cost 65
+ ip ospf network point-to-point
+ exit
+! R2 (sisi lawan, tipe network harus sama di kedua ujung)
+interface fa0/0
+ ip ospf network point-to-point
+ exit
+
+! Cost fa0/0 R1 menjadi 65, lebih besar dari serial (64),
+! sehingga rute ke 192.168.20.0/24 berpindah lewat serial.
+! Verifikasi: show ip route 192.168.20.0
+
+! Activity 2: reference bandwidth (WAJIB sama di semua router OSPF)
+router ospf 1
+ auto-cost reference-bandwidth 1000
+ exit
+! Verifikasi: show ip ospf interface
