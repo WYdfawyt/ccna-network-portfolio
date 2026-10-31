@@ -1,0 +1,30 @@
+! Switch1 (Cisco 2960-24TT)
+enable
+configure terminal
+
+vlan 10
+vlan 20
+ exit
+
+! Trunk ke Switch0
+interface gig0/1
+ description Trunk ke Switch0 Gig0/2
+ switchport mode trunk
+ exit
+
+! Server0 (VLAN 10)
+interface fa0/1
+ switchport mode access
+ switchport access vlan 10
+ exit
+! PC4 (VLAN 20)
+interface fa0/2
+ switchport mode access
+ switchport access vlan 20
+ exit
+end
+write memory
+
+! Verifikasi
+! show vlan brief
+! show interfaces trunk

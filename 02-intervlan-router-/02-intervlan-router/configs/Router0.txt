@@ -1,0 +1,24 @@
+! Router0 (Cisco 2911) - Router on a stick
+enable
+configure terminal
+
+interface gig0/0
+ description Trunk ke Switch0 Gig0/1
+ no shutdown
+ exit
+interface gig0/0.10
+ description Gateway VLAN 10
+ encapsulation dot1q 10
+ ip address 192.168.10.1 255.255.255.0
+ exit
+interface gig0/0.20
+ description Gateway VLAN 20
+ encapsulation dot1q 20
+ ip address 192.168.20.1 255.255.255.0
+ exit
+end
+write memory
+
+! Verifikasi
+! show ip interface brief
+! show ip route
