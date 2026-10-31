@@ -1,0 +1,9 @@
+! Konfigurasi IP perangkat statis (klik perangkat > Desktop > IP Configuration > Static)
+
+Server (DNS, DHCP, WEB)  IP 192.168.10.2   Mask 255.255.255.0  Gateway 192.168.10.1  DNS 192.168.10.2  (VLAN 10, MLS Fa0/3)
+PC Administrator         IP 192.168.10.3   Mask 255.255.255.0  Gateway 192.168.10.1  DNS 192.168.10.2  (VLAN 10, MLS Fa0/2)
+
+! WLC-3504: klik WLC > Config > Management (atau Settings)
+WLC Management           IP 192.168.10.10  Mask 255.255.255.0  Gateway 192.168.10.1                    (VLAN 10, MLS Fa0/1 trunk)
+
+! AP-1, AP-2 dan Smartphone memperoleh IP otomatis lewat DHCP (jangan diisi manual)

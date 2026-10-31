@@ -1,0 +1,65 @@
+! MLS (Cisco 3560-24PS) - gateway VLAN, DHCP relay, trunk ke WLC
+enable
+configure terminal
+hostname MLS
+
+vlan 10
+ name MGMT
+vlan 20
+ name AP
+vlan 30
+ name CLIENT
+ exit
+
+! --- Routing antar VLAN dan DHCP relay ke server ---
+ip routing
+interface vlan 10
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+ exit
+interface vlan 20
+ ip address 192.168.20.1 255.255.255.0
+ ip helper-address 192.168.10.2
+ no shutdown
+ exit
+interface vlan 30
+ ip address 192.168.30.1 255.255.255.0
+ ip helper-address 192.168.10.2
+ no shutdown
+ exit
+
+! --- Trunk ke WLC (management VLAN 10 untagged, client VLAN 30 tagged) ---
+interface fa0/1
+ description Trunk ke WLC Gig1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 10
+ switchport trunk allowed vlan 10,30
+ exit
+
+! --- PC Administrator dan Server (VLAN 10) ---
+interface fa0/2
+ description PC Administrator
+ switchport mode access
+ switchport access vlan 10
+ exit
+interface fa0/3
+ description Server DNS DHCP WEB
+ switchport mode access
+ switchport access vlan 10
+ exit
+
+! --- Access Point (VLAN 20) ---
+interface range fa0/4-5
+ description Lightweight AP
+ switchport mode access
+ switchport access vlan 20
+ exit
+end
+write memory
+
+! Verifikasi
+! show vlan brief
+! show ip interface brief
+! show interfaces trunk
+! show ip route

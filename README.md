@@ -13,7 +13,7 @@ Fokus: jaringan dan keamanan jaringan (Cisco CCNA, MikroTik MTCNA)
 | 02 | [InterVLAN Router](02-intervlan-router/) | VLAN, trunk, router on a stick | Selesai |
 | 03 | [Link Aggregation](03-link-aggregation/) | EtherChannel LACP Layer 2 dan Layer 3 | Selesai |
 | 04 | [STP](04-stp/) | Rapid PVST+, root primary dan secondary, load balancing per VLAN | Selesai |
-| 05 | WLC | Wireless LAN Controller | Menyusul |
+| 05 | [WLC](05-wlc/) | Wireless LAN Controller, CAPWAP, WLAN WPA2 | Selesai |
 | 06 | Routing | Static route, OSPF, ACL antar site | Menyusul |
 | 07 | InterVLAN MLS + DHCP | Routing antar VLAN di MLS, DHCP relay | Menyusul |
 | 08 | Super lab | Gabungan seluruh konfigurasi | Menyusul |

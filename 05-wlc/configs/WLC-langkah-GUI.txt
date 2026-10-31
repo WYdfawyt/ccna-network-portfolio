@@ -1,0 +1,26 @@
+! Konfigurasi WLC melalui GUI (tampilan dapat sedikit berbeda antar versi)
+! Akses: PC Administrator > Desktop > Web Browser > https://192.168.10.10
+
+1. Login ke WLC dengan akun admin.
+2. Controller > Interfaces > New
+     Interface Name : vlan30
+     VLAN ID        : 30
+     IP Address     : 192.168.30.2   Netmask 255.255.255.0   Gateway 192.168.30.1
+     DHCP Server    : 192.168.10.2
+   Apply.
+3. WLANs > Create New > Type WLAN > Go
+     Profile Name   : STAFF-WIFI
+     SSID           : STAFF-WIFI
+   Apply, lalu tab General:
+     Status         : Enabled
+     Interface      : vlan30
+4. Tab Security > Layer 2:
+     Layer 2 Security : WPA + WPA2
+     WPA2 Policy / Encryption : AES
+     Auth Key Mgmt  : PSK
+     Passphrase     : <password>
+   Apply.
+5. Wireless > Access Points: pastikan AP-1 dan AP-2 terdaftar (join via CAPWAP).
+6. Smartphone0/1 > Config > Wireless0:
+     SSID STAFF-WIFI, Authentication WPA2-PSK, isi passphrase, IP Configuration DHCP.
+7. Uji: Smartphone > Desktop > Web Browser > http://192.168.10.2

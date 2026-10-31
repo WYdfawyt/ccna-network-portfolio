@@ -1,0 +1,18 @@
+! DHCP server di Server (klik Server > Services > DHCP > Service: On)
+! Isi dua pool. Hapus atau nonaktifkan serverPool bawaan jika ada.
+
+Pool 1: AP-POOL
+  Default Gateway  192.168.20.1
+  DNS Server       192.168.10.2
+  Start IP Address 192.168.20.100   Subnet Mask 255.255.255.0
+  Max Users        20
+  WLC Controller IP 192.168.10.10   (agar AP menemukan WLC, setara DHCP option 43)
+
+Pool 2: CLIENT-POOL
+  Default Gateway  192.168.30.1
+  DNS Server       192.168.10.2
+  Start IP Address 192.168.30.100   Subnet Mask 255.255.255.0
+  Max Users        50
+
+! Klik Add / Save setelah mengisi tiap pool.
+! Web server: Services > HTTP > HTTP On (untuk uji dari smartphone)
