@@ -1,0 +1,21 @@
+! CORE1 (Cisco 3560-24PS) - Skenario 1: root primary untuk semua VLAN
+enable
+configure terminal
+hostname CORE1
+
+vlan 2
+ exit
+
+spanning-tree mode rapid-pvst
+spanning-tree vlan 1 root primary
+
+interface range fa0/1-4
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ exit
+end
+write memory
+
+! Verifikasi
+! show spanning-tree vlan 1
+! show interfaces trunk

@@ -1,0 +1,20 @@
+! Skenario 2: root berbeda per VLAN (load balancing)
+! Jalankan SETELAH konfigurasi skenario 1. VLAN 2 harus sudah ada di semua switch.
+
+! --- CORE1: root VLAN 1, cadangan VLAN 2 ---
+configure terminal
+spanning-tree vlan 1 priority 0
+spanning-tree vlan 2 priority 4096
+end
+write memory
+
+! --- CORE2: root VLAN 2, cadangan VLAN 1 ---
+configure terminal
+spanning-tree vlan 2 priority 0
+spanning-tree vlan 1 priority 4096
+end
+write memory
+
+! Verifikasi di semua switch
+! show spanning-tree vlan 1
+! show spanning-tree vlan 2

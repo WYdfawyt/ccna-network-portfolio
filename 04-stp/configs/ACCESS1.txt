@@ -1,0 +1,19 @@
+! ACCESS1 (Cisco 2960-24TT)
+enable
+configure terminal
+hostname ACCESS1
+
+vlan 2
+ exit
+
+spanning-tree mode rapid-pvst
+
+interface range fa0/1-2
+ switchport mode trunk
+ exit
+end
+write memory
+
+! Verifikasi
+! show spanning-tree vlan 1
+! show interfaces trunk
