@@ -15,7 +15,7 @@ Fokus: jaringan dan keamanan jaringan (Cisco CCNA, MikroTik MTCNA)
 | 04 | [STP](04-stp/) | Rapid PVST+, root primary dan secondary, load balancing per VLAN | Selesai |
 | 05 | [WLC](05-wlc/) | Wireless LAN Controller, CAPWAP, WLAN WPA2 | Selesai |
 | 06 | [Routing](06-routing/) | Static route, floating static, OSPF, ACL | Selesai |
-| 07 | InterVLAN MLS + DHCP | Routing antar VLAN di MLS, DHCP relay | Menyusul |
+| 07 | [InterVLAN MLS + DHCP](07-intervlan-mls-dhcp/) | Routing antar VLAN di MLS (SVI), DHCP relay | Selesai |
 | 08 | Super lab | Gabungan seluruh konfigurasi | Menyusul |
 
 ## Skill yang ditunjukkan

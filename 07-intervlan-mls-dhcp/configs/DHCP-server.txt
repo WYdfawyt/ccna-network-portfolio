@@ -1,0 +1,9 @@
+! DHCP server di ServerVLAN30 (klik Server > Services > DHCP > Service: On)
+! Satu pool per VLAN. Kolom yang diisi lalu klik Add / Save.
+
+Pool Name        Default Gateway   DNS Server   Start IP Address   Subnet Mask      Max User
+Vlan-10          192.168.10.1      8.8.8.8      192.168.10.10      255.255.255.0    246
+Vlan-20          192.168.20.1      8.8.8.8      192.168.20.10      255.255.255.0    246
+serverPool       0.0.0.0           0.0.0.0      192.168.30.0       255.255.255.0    (bawaan, boleh dibiarkan)
+
+! Catatan: pool dipilih server berdasarkan network pada IP SVI (giaddr) yang dicantumkan oleh relay.

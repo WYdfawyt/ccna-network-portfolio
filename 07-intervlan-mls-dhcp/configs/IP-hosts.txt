@@ -1,0 +1,7 @@
+! Konfigurasi IP host
+
+ServerVLAN30  (statis)  IP 192.168.30.10  Mask 255.255.255.0  Gateway 192.168.30.1  DNS 8.8.8.8
+                        (klik Server > Desktop > IP Configuration > Static)
+
+PC0, PC1 (VLAN 10)   : DHCP  (Desktop > IP Configuration > DHCP)  -> 192.168.10.x, gateway 192.168.10.1
+PC2, PC3 (VLAN 20)   : DHCP  (Desktop > IP Configuration > DHCP)  -> 192.168.20.x, gateway 192.168.20.1

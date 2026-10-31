@@ -1,0 +1,21 @@
+! ALTERNATIF (tidak dipakai bersamaan dengan relay): MLS sebagai DHCP server sendiri
+! Jika dipakai, hapus ip helper-address dari SVI VLAN 10 dan 20.
+
+ip dhcp excluded-address 192.168.10.1 192.168.10.9
+ip dhcp excluded-address 192.168.20.1 192.168.20.9
+
+ip dhcp pool VLAN-10
+ network 192.168.10.0 255.255.255.0
+ default-router 192.168.10.1
+ dns-server 8.8.8.8
+ lease 0 0 10
+ exit
+ip dhcp pool VLAN-20
+ network 192.168.20.0 255.255.255.0
+ default-router 192.168.20.1
+ dns-server 8.8.8.8
+ lease 0 0 10
+ exit
+
+! Verifikasi
+! show ip dhcp binding

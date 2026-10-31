@@ -1,0 +1,56 @@
+! MLS0 (Cisco 3560-24PS) - InterVLAN routing (SVI) dan DHCP relay
+enable
+configure terminal
+hostname MLS0
+
+vlan 10
+ name VLAN10
+vlan 20
+ name VLAN20
+vlan 30
+ name SERVER-VLAN30
+ exit
+
+! --- Routing antar VLAN ---
+ip routing
+
+! --- SVI = default gateway tiap VLAN ---
+interface vlan 10
+ ip address 192.168.10.1 255.255.255.0
+ ip helper-address 192.168.30.10
+ no shutdown
+ exit
+interface vlan 20
+ ip address 192.168.20.1 255.255.255.0
+ ip helper-address 192.168.30.10
+ no shutdown
+ exit
+interface vlan 30
+ ip address 192.168.30.1 255.255.255.0
+ no shutdown
+ exit
+
+! --- Port host ---
+interface range fa0/1-2
+ description PC0 dan PC1 (VLAN 10)
+ switchport mode access
+ switchport access vlan 10
+ exit
+interface range fa0/3-4
+ description PC3 dan PC2 (VLAN 20)
+ switchport mode access
+ switchport access vlan 20
+ exit
+interface fa0/5
+ description ServerVLAN30 (DHCP server)
+ switchport mode access
+ switchport access vlan 30
+ exit
+end
+write memory
+
+! Verifikasi
+! show vlan brief
+! show ip interface brief
+! show ip route
+! show running-config | section interface Vlan
