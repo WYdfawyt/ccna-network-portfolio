@@ -1,0 +1,24 @@
+! MLS3 (Cisco 3560-24PS) - EtherChannel Layer 3 (LACP active) ke MLS2
+enable
+configure terminal
+hostname MLS3
+
+! --- EtherChannel Layer 3 (Po2) ke MLS2 (Menggunakan Fa0/1-2 sesuai fisik) ---
+interface range fa0/1-2
+ description Anggota Po2 ke MLS2
+ no switchport
+ channel-group 2 mode active
+ no shutdown
+ exit
+
+interface port-channel 2
+ description EtherChannel L3 ke MLS2
+ ip address 23.23.23.3 255.255.255.0
+ no shutdown
+ exit
+
+! --- Routing agar MLS1 terjangkau (uji end-to-end) ---
+ip routing
+ip route 12.12.12.0 255.255.255.0 23.23.23.2
+end
+write memory

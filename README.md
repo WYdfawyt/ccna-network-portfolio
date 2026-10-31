@@ -11,7 +11,7 @@ Fokus: jaringan dan keamanan jaringan (Cisco CCNA, MikroTik MTCNA)
 | --- | --- | --- | --- |
 | 01 | [HSRP](01-hsrp/) | Gateway redundan, NAT overload, uji failover | Selesai |
 | 02 | [InterVLAN Router](02-intervlan-router/) | VLAN, trunk, router on a stick | Selesai |
-| 03 | Link Aggregation | EtherChannel LACP antar MLS | Menyusul |
+| 03 | [Link Aggregation](03-link-aggregation/) | EtherChannel LACP Layer 2 dan Layer 3 | Selesai |
 | 04 | STP | Rapid-PVST, root bridge | Menyusul |
 | 05 | WLC | Wireless LAN Controller | Menyusul |
 | 06 | Routing | Static route, OSPF, ACL antar site | Menyusul |
