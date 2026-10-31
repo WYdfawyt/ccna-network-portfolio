@@ -1,8 +1,8 @@
 # CCNA Network Portfolio
 
-Kumpulan lab jaringan Cisco yang saya kerjakan selama training **CCNA 200-301** menggunakan **Cisco Packet Tracer**. Setiap lab berisi tujuan, topologi, tabel IP, konfigurasi, penjelasan, bukti verifikasi, serta masalah dan solusinya.
+Kumpulan lab jaringan Cisco yang saya kerjakan selama training **CCNA 200-301** (ID-Networkers, 12-15 Oktober 2026) menggunakan **Cisco Packet Tracer**. Setiap lab berisi tujuan, topologi, tabel IP, konfigurasi, penjelasan, bukti verifikasi, serta masalah dan solusinya.
 
-**Cahaya Jaya Prabasa** · Fresh graduate D4 Teknik Telekomunikasi, Politeknik Negeri Semarang
+**Cahaya Jaya Prabasa** · Fresh graduate D4 Teknik Telekomunikasi, Politeknik Negeri Semarang<br>
 Fokus: jaringan dan keamanan jaringan (Cisco CCNA, MikroTik MTCNA)
 
 ## Daftar lab
@@ -10,7 +10,7 @@ Fokus: jaringan dan keamanan jaringan (Cisco CCNA, MikroTik MTCNA)
 | No | Lab | Topik utama | Status |
 | --- | --- | --- | --- |
 | 01 | [HSRP](01-hsrp/) | Gateway redundan, NAT overload, uji failover | Selesai |
-| 02 | InterVLAN Router | VLAN, trunk, router on a stick | Menyusul |
+| 02 | [InterVLAN Router](02-intervlan-router/) | VLAN, trunk, router on a stick | Selesai |
 | 03 | Link Aggregation | EtherChannel LACP antar MLS | Menyusul |
 | 04 | STP | Rapid-PVST, root bridge | Menyusul |
 | 05 | WLC | Wireless LAN Controller | Menyusul |
