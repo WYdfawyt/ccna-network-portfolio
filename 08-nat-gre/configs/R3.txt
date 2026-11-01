@@ -1,0 +1,40 @@
+! R3 (Cisco 1841) - Static NAT, static PAT, dan GRE tunnel ke R1
+enable
+configure terminal
+hostname R3
+
+interface fa0/0
+ description LAN server (SW3) - private
+ ip address 192.168.20.1 255.255.255.0
+ ip nat inside
+ no shutdown
+ exit
+interface fa0/1
+ description Ke ISP (R2) - public
+ ip address 200.1.1.1 255.255.255.0
+ ip nat outside
+ no shutdown
+ exit
+
+! --- Static NAT: server 192.168.20.20 tampak sebagai 200.1.1.1 ---
+ip nat inside source static 192.168.20.20 200.1.1.1
+! --- Static PAT: 200.1.1.5 port 4443 diteruskan ke server .10 port 443 ---
+ip nat inside source static tcp 192.168.20.10 443 200.1.1.5 4443
+
+! --- Default route ke ISP ---
+ip route 0.0.0.0 0.0.0.0 200.1.1.2
+
+! --- GRE tunnel ke R1 ---
+interface tunnel 0
+ tunnel source fa0/1
+ tunnel destination 100.1.1.1
+ ip address 10.10.10.2 255.255.255.252
+ exit
+ip route 192.168.10.0 255.255.255.0 10.10.10.1
+end
+write memory
+
+! Verifikasi
+! show ip nat translations
+! show interfaces tunnel 0
+! show ip route

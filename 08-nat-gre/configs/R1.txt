@@ -1,0 +1,40 @@
+! R1 (Cisco 1841) - PAT (NAT overload) dan GRE tunnel ke R3
+enable
+configure terminal
+hostname R1
+
+interface fa0/0
+ description LAN PC (SW1) - private
+ ip address 192.168.10.1 255.255.255.0
+ ip nat inside
+ no shutdown
+ exit
+interface fa0/1
+ description Ke ISP (R2) - public
+ ip address 100.1.1.1 255.255.255.0
+ ip nat outside
+ no shutdown
+ exit
+
+! --- PAT: banyak PC berbagi IP f0/1 ---
+access-list 1 permit 192.168.10.0 0.0.0.255
+ip nat inside source list 1 interface fa0/1 overload
+
+! --- Default route ke ISP ---
+ip route 0.0.0.0 0.0.0.0 100.1.1.2
+
+! --- GRE tunnel ke R3 ---
+interface tunnel 0
+ tunnel source fa0/1
+ tunnel destination 200.1.1.1
+ ip address 10.10.10.1 255.255.255.252
+ exit
+ip route 192.168.20.0 255.255.255.0 10.10.10.2
+end
+write memory
+
+! Verifikasi
+! show ip nat translations
+! show ip nat statistics
+! show interfaces tunnel 0
+! show ip route

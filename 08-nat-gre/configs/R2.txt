@@ -1,0 +1,21 @@
+! R2 (Cisco 1841) - ISP: hanya IP publik, tanpa rute ke jaringan private
+enable
+configure terminal
+hostname R2
+
+interface fa0/0
+ description Ke R1
+ ip address 100.1.1.2 255.255.255.0
+ no shutdown
+ exit
+interface fa0/1
+ description Ke R3
+ ip address 200.1.1.2 255.255.255.0
+ no shutdown
+ exit
+end
+write memory
+
+! Verifikasi
+! show ip route
+! Perhatikan: tidak ada rute ke 192.168.10.0 atau 192.168.20.0

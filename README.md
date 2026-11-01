@@ -16,7 +16,8 @@ Fokus: jaringan dan keamanan jaringan (Cisco CCNA, MikroTik MTCNA)
 | 05 | [WLC](05-wlc/) | Wireless LAN Controller, CAPWAP, WLAN WPA2 | Selesai |
 | 06 | [Routing](06-routing/) | Static route, floating static, OSPF, ACL | Selesai |
 | 07 | [InterVLAN MLS + DHCP](07-intervlan-mls-dhcp/) | Routing antar VLAN di MLS (SVI), DHCP relay | Selesai |
-| 08 | Super lab | Gabungan seluruh konfigurasi | Menyusul |
+| 08 | [NAT dan GRE Tunnel](08-nat-gre/) | PAT, static NAT, static PAT, GRE tunnel | Selesai |
+| 09 | Super lab | Gabungan seluruh konfigurasi | Menyusul |
 
 ## Skill yang ditunjukkan
 
@@ -24,6 +25,7 @@ Fokus: jaringan dan keamanan jaringan (Cisco CCNA, MikroTik MTCNA)
 - **Routing:** static route, OSPF, inter-VLAN routing, MLS
 - **IP services:** DHCP dan DHCP relay, NAT/PAT
 - **Redundansi:** HSRP
+- **WAN dan VPN:** GRE tunnel
 - **Keamanan:** ACL, port security, SSH
 - **Wireless:** WLC dan AP
 
