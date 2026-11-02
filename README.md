@@ -5,6 +5,12 @@ Kumpulan lab jaringan Cisco yang saya kerjakan selama training **CCNA 200-301** 
 **Cahaya Jaya Prabasa** · Fresh graduate D4 Teknik Telekomunikasi, Politeknik Negeri Semarang<br>
 Fokus: jaringan dan keamanan jaringan (Cisco CCNA, MikroTik MTCNA)
 
+## Featured project
+
+[![Super Lab: Multi-Site Enterprise Network](09-super-lab/images/banner.jpeg)](09-super-lab/)
+
+**[Super Lab: Jaringan Multi-Site dengan OSPF dan BGP](09-super-lab/)** menghubungkan Datacenter, Jakarta, dan Semarang lewat satu ISP. OSPF area 0 berjalan di tiap site, eBGP menukar prefix antar tiga AS, dan rute BGP disebarkan ke OSPF sehingga seluruh jaringan saling terjangkau. [Baca studi kasus lengkap](09-super-lab/).
+
 ## Daftar lab
 
 | No | Lab | Topik utama | Status |
@@ -17,7 +23,7 @@ Fokus: jaringan dan keamanan jaringan (Cisco CCNA, MikroTik MTCNA)
 | 06 | [Routing](06-routing/) | Static route, floating static, OSPF, ACL | Selesai |
 | 07 | [InterVLAN MLS + DHCP](07-intervlan-mls-dhcp/) | Routing antar VLAN di MLS (SVI), DHCP relay | Selesai |
 | 08 | [NAT dan GRE Tunnel](08-nat-gre/) | PAT, static NAT, static PAT, GRE tunnel | Selesai |
-| 09 | Super lab | Gabungan seluruh konfigurasi | Menyusul |
+| 09 | [**Super Lab (featured)**](09-super-lab/) | Multi-site: OSPF per site dan eBGP lewat ISP (DC, JKT, SMR) | Selesai |
 
 ## Skill yang ditunjukkan
 
@@ -26,6 +32,7 @@ Fokus: jaringan dan keamanan jaringan (Cisco CCNA, MikroTik MTCNA)
 - **IP services:** DHCP dan DHCP relay, NAT/PAT
 - **Redundansi:** HSRP
 - **WAN dan VPN:** GRE tunnel
+- **Routing multi-site:** OSPF dan eBGP
 - **Keamanan:** ACL, port security, SSH
 - **Wireless:** WLC dan AP
 

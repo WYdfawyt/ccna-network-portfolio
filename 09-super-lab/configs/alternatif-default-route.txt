@@ -1,0 +1,30 @@
+! ALTERNATIF jika "redistribute bgp ... subnets" ditolak atau bermasalah di Packet Tracer.
+! Border router mengiklankan default route ke OSPF; BGP tetap dipakai untuk saling tukar prefix lewat ISP.
+
+! --- R-Core-Off-1 JKT ---
+ip route 0.0.0.0 0.0.0.0 203.0.113.1
+router ospf 1
+ no redistribute bgp 65200 subnets
+ default-information originate
+ exit
+
+! --- RouterOff2-1 SMR ---
+ip route 0.0.0.0 0.0.0.0 203.0.113.1
+router ospf 1
+ no redistribute bgp 65200 subnets
+ default-information originate
+ exit
+
+! --- R-CORE-1-DC ---
+ip route 0.0.0.0 0.0.0.0 203.0.113.1
+router ospf 1
+ no redistribute bgp 65100 subnets
+ default-information originate
+ exit
+
+! --- R-CORE-2-DC ---
+ip route 0.0.0.0 0.0.0.0 203.0.113.1
+router ospf 1
+ no redistribute bgp 65100 subnets
+ default-information originate
+ exit

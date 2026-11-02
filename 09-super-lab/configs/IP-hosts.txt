@@ -1,0 +1,12 @@
+! IP host Datacenter (RENCANA, cocokkan dengan .pkt; isi manual pada Desktop > IP Configuration > Static)
+
+SRV-1-AAA   IP 172.16.111.10  Mask 255.255.255.0  Gateway 172.16.111.1   (VLAN 111)
+SRV-2-FTP   IP 172.16.111.11  Mask 255.255.255.0  Gateway 172.16.111.1   (VLAN 111)
+SRV-3-WEB   IP 172.16.222.10  Mask 255.255.255.0  Gateway 172.16.222.1   (VLAN 222)
+SRV-4-DNS   IP 172.16.222.11  Mask 255.255.255.0  Gateway 172.16.222.1   (VLAN 222)
+LP-Admin-DC IP 172.16.99.2    Mask 255.255.255.240 Gateway 172.16.99.1   (VLAN 99 MGMT)
+
+! JKT dan SMR memakai IP yang sudah ada (lihat Lab 06 dan catatan Day 3):
+! JKT server SRV-Off1 172.21.30.10/24; PC VLAN 10/20 via DHCP (helper 172.21.30.10)
+! SMR PC1-Off2 192.168.10.2, PC2-Off2 192.168.10.3, PC5-Off2 192.168.10.4
+!     PC3-Off2 192.168.20.2, PC4-Off2 192.168.20.3, PC6-Off2 192.168.20.4

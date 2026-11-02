@@ -1,0 +1,38 @@
+! Urutan verifikasi. Lanjut ke fase berikutnya hanya jika fase sebelumnya lolos.
+
+FASE 0 - Kondisi awal perangkat
+  Semua router DC: interface harus "no shutdown" (router default-nya mati)
+  Semua perangkat DC: ganti hostname (R-CORE-1-DC, R-CORE-2-DC, MLS-1-DC, MLS-2-DC, SW-ACC-1-DC, SW-ACC-2-DC)
+  show cdp neighbors di tiap perangkat DC setelah link naik (CDP hanya menampilkan link yang up)
+
+FASE 1 - Segmen ISP (VLAN 100, 203.0.113.0/28)
+  SW-DISTRI-ISP: terapkan SW-DISTRI-ISP.txt, lalu show vlan brief (VLAN 100: Gig1/0/2-5) dan show interfaces trunk (Gig1/0/1 membawa VLAN 100)
+  ISP-Router:    terapkan ISP-Router.txt (IP di Gig0/1.100, BUKAN Gig0/0)
+  Border:        pasang IP 203.0.113.x/28 pada interface menuju SW-DISTRI-ISP
+  ISP-Router: ping 203.0.113.2   (JKT)
+              ping 203.0.113.3   (SMR)
+              ping 203.0.113.4   (R-CORE-1-DC)
+              ping 203.0.113.5   (R-CORE-2-DC)
+  Jika gagal: show cdp neighbors di SW-DISTRI-ISP dan switch 2960 (pastikan 2960 terhubung ke SW-DISTRI-ISP),
+              show vlan brief dan show interfaces status (semua port VLAN 1, tidak shutdown)
+
+FASE 2 - OSPF per site
+  JKT & SMR: show ip ospf neighbor      (R-Core-Off-1 punya 3 neighbor FULL: MLS1, MLS2, SMR)
+  DC:        show ip ospf neighbor      (R-CORE-1/2-DC FULL dengan MLS-1/2-DC)
+  show ip route ospf
+
+FASE 3 - eBGP
+  ISP-Router: show ip bgp summary       (4 neighbor, State/PfxRcd berupa angka, bukan Idle/Active)
+  Border:     show ip bgp summary       (1 neighbor Established)
+
+FASE 4 - Prefix tertukar
+  ISP-Router: show ip bgp               (prefix JKT, SMR, dan DC tampil)
+  Border:     show ip bgp
+  Border:     show ip route bgp         (rute berkode B)
+
+FASE 5 - Redistribusi ke OSPF
+  MLS JKT: show ip route ospf           (prefix DC 172.16.x.x tampil sebagai O E2)
+  MLS-DC:  show ip route ospf           (prefix 172.21.x.x dan 192.168.x.x tampil sebagai O E2)
+
+FASE 6 - End-to-end (lihat matriks uji di README)
+  ping dan traceroute antar site

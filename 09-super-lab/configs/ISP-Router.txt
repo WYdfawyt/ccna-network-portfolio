@@ -1,0 +1,35 @@
+! ISP-Router (router di cluster ISP) - speaker BGP milik ISP, AS 65000
+! Jalur ke border: ISP-Router Gig0/1 <-> SW-DISTRI-ISP Gig1/0/1 (trunk, terkonfirmasi CDP).
+! Subinterface lama Gig0/1.10, .20, .30 TIDAK diubah. Ditambah subinterface Gig0/1.100
+! untuk VLAN peering ISP (203.0.113.0/28). Gig0/0 menuju switch 2960 buntu dan tidak dipakai.
+enable
+configure terminal
+
+interface gig0/1
+ no shutdown
+ exit
+interface gig0/1.100
+ description ISP-PEERING VLAN 100 (203.0.113.0/28)
+ encapsulation dot1q 100
+ ip address 203.0.113.1 255.255.255.240
+ exit
+
+router bgp 65000
+ bgp router-id 10.0.2.1
+ bgp log-neighbor-changes
+ neighbor 203.0.113.2 remote-as 65200
+ neighbor 203.0.113.3 remote-as 65200
+ neighbor 203.0.113.4 remote-as 65100
+ neighbor 203.0.113.5 remote-as 65100
+ exit
+end
+write memory
+
+! Verifikasi
+! show ip interface brief
+! ping 203.0.113.2     (JKT)
+! ping 203.0.113.3     (SMR)
+! ping 203.0.113.4     (R-CORE-1-DC)
+! ping 203.0.113.5     (R-CORE-2-DC)
+! show ip bgp summary
+! show ip bgp

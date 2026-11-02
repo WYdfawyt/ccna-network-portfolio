@@ -1,0 +1,35 @@
+! SW-DISTRI-ISP (Cisco 3650) - dijadikan switch Layer 2 untuk VLAN peering ISP
+! Port terkonfirmasi CDP:
+!   Gig1/0/1 -> ISP-Router Gig0/1       Gig1/0/2 -> R-Core1-JKT Gig0/0/0
+!   Gig1/0/3 -> R-SMR-1 Gig0/1          Gig1/0/4 -> R-CORE-1-DC Gig0/0
+!   Gig1/0/5 -> R-CORE-2-DC Gig0/0
+! SIMPAN KONFIGURASI LAMA DULU: show running-config | section interface GigabitEthernet1/0
+enable
+configure terminal
+
+vlan 100
+ name ISP-PEERING
+ exit
+
+! --- Trunk ke ISP-Router: tambahkan VLAN 100 ---
+interface gig1/0/1
+ description Trunk ke ISP-Router Gig0/1
+ switchport mode trunk
+ switchport trunk allowed vlan add 100
+ no shutdown
+ exit
+
+! --- Port ke keempat border: access VLAN 100 ---
+interface range gig1/0/2 - 5
+ switchport
+ switchport mode access
+ switchport access vlan 100
+ no shutdown
+ exit
+end
+write memory
+
+! Verifikasi
+! show vlan brief
+! show interfaces trunk
+! show interfaces status

@@ -1,0 +1,35 @@
+! R-Core-Off-1 / R-Core1-JKT (ISR4331) - TAMBAHAN di atas konfigurasi OSPF Day 3
+! Konfigurasi yang sudah ada tetap dipakai: Gig0/0/1 10.1.1.1/30, Gig0/0/2 10.1.1.5/30,
+! Se0/1/0 10.1.1.9/30, Loopback0 10.0.0.1/32 dan router ospf 1 (area 0).
+enable
+configure terminal
+
+! --- Segmen ISP 203.0.113.0/28 (JANGAN dimasukkan ke OSPF) ---
+interface gig0/0/0
+ description Ke segmen ISP (SW-DISTRI-ISP Gig1/0/2)
+ ip address 203.0.113.2 255.255.255.240
+ no shutdown
+ exit
+
+! --- eBGP ke ISP, advertise prefix JKT ---
+router bgp 65200
+ bgp router-id 10.0.0.1
+ bgp log-neighbor-changes
+ neighbor 203.0.113.1 remote-as 65000
+ network 172.21.10.0 mask 255.255.255.0
+ network 172.21.20.0 mask 255.255.255.0
+ network 172.21.30.0 mask 255.255.255.0
+ exit
+
+! --- Rute hasil BGP (prefix DC dan lain-lain) disebarkan ke OSPF ---
+router ospf 1
+ redistribute bgp 65200 subnets
+ exit
+end
+write memory
+
+! Verifikasi
+! show ip bgp summary
+! show ip bgp
+! show ip route bgp
+! show ip route ospf

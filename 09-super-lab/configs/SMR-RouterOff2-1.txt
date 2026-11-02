@@ -1,0 +1,34 @@
+! RouterOff2-1 / R1-Off-2 SMR (2911) - TAMBAHAN di atas konfigurasi OSPF Day 3
+! Konfigurasi yang sudah ada tetap dipakai: Gig0/0.10 192.168.10.1/24, Gig0/0.20 192.168.20.1/24,
+! Se0/0/0 10.1.1.10/30, Loopback0 10.0.0.2/32 dan router ospf 1 (area 0).
+enable
+configure terminal
+
+! --- Segmen ISP 203.0.113.0/28 (JANGAN dimasukkan ke OSPF) ---
+interface gig0/1
+ description Ke segmen ISP (SW-DISTRI-ISP Gig1/0/3)
+ ip address 203.0.113.3 255.255.255.240
+ no shutdown
+ exit
+
+! --- eBGP ke ISP, advertise prefix SMR ---
+router bgp 65200
+ bgp router-id 10.0.0.2
+ bgp log-neighbor-changes
+ neighbor 203.0.113.1 remote-as 65000
+ network 192.168.10.0 mask 255.255.255.0
+ network 192.168.20.0 mask 255.255.255.0
+ ! network 192.168.99.0 mask 255.255.255.248   <- aktifkan hanya jika subinterface VLAN 99 sudah ada
+ exit
+
+! --- Rute hasil BGP disebarkan ke OSPF ---
+router ospf 1
+ redistribute bgp 65200 subnets
+ exit
+end
+write memory
+
+! Verifikasi
+! show ip bgp summary
+! show ip bgp
+! show ip route bgp

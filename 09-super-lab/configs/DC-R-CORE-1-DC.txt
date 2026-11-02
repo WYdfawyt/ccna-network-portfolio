@@ -1,0 +1,49 @@
+! R-CORE-1-DC (Cisco 2911) - border Datacenter, OSPF area 0 dan eBGP AS 65100
+! RENCANA PORT (cocokkan dengan kabel di .pkt, cek: show cdp neighbors):
+!   Gig0/0 -> SW-DISTRI-ISP Gig1/0/4 (terkonfirmasi CDP)
+!   Gig0/1 -> MLS-1-DC      Gig0/2 -> MLS-2-DC      (asumsi, cek: show cdp neighbors setelah no shutdown)
+enable
+configure terminal
+hostname R-CORE-1-DC
+
+interface gig0/0
+ description Ke segmen ISP (SW-DISTRI-ISP Gig1/0/4)
+ ip address 203.0.113.4 255.255.255.240
+ no shutdown
+ exit
+interface gig0/1
+ description Ke MLS-1-DC
+ ip address 10.2.1.1 255.255.255.252
+ no shutdown
+ exit
+interface gig0/2
+ description Ke MLS-2-DC
+ ip address 10.2.1.5 255.255.255.252
+ no shutdown
+ exit
+interface loopback 0
+ ip address 10.0.1.1 255.255.255.255
+ exit
+
+router ospf 1
+ router-id 10.0.1.1
+ network 10.2.1.0 0.0.0.255 area 0
+ network 10.0.1.1 0.0.0.0 area 0
+ redistribute bgp 65100 subnets
+ exit
+
+router bgp 65100
+ bgp router-id 10.0.1.1
+ bgp log-neighbor-changes
+ neighbor 203.0.113.1 remote-as 65000
+ network 172.16.111.0 mask 255.255.255.0
+ network 172.16.222.0 mask 255.255.255.0
+ network 172.16.99.0 mask 255.255.255.240
+ exit
+end
+write memory
+
+! Verifikasi
+! show ip ospf neighbor
+! show ip bgp summary
+! show ip route
